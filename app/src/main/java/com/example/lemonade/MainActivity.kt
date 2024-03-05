@@ -38,6 +38,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -51,6 +52,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.Theme_Lemonade)
+
+        window.statusBarColor = getColor(R.color.teal_700)
+        window.navigationBarColor = getColor(R.color.teal_700)
         setContent {
             LemonadeTheme {
                 // A surface container using the 'background' color from the theme
@@ -71,7 +75,19 @@ fun LemonadeApp(){
     var squeezeCount by remember { mutableStateOf(0) }
 
     Scaffold (
+        topBar = {
+            CenterAlignedTopAppBar(
+                title = {
+                    Text(
+                        text = "Lemonade",
+                        fontWeight = FontWeight.Bold,
+                        color = (colorResource(id = R.color.teal_700))
+                    )
+                },
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(colorResource(id = R.color.yellow))
+            )
 
+        }
     ){
         innerPadding ->
         Surface (
@@ -136,7 +152,7 @@ fun LemonTextAndImage(
     Box(
         modifier = Modifier
     ){
-        Image(painter = painterResource(R.drawable.lemon),
+        Image(painter = painterResource(R.drawable.lemonade_app_background),
             contentDescription = null,
             contentScale = ContentScale.Crop,
             alpha = 0.7f
